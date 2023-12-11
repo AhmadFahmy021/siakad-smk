@@ -20,7 +20,7 @@ class AbsenFactory extends Factory
         $faker = fake('id_ID');
         return [
             "schedule_id" => Schedule::all()->random()->id,
-            "class_time" => $faker->date(),
+            "class_time" => $faker->time(),
             "information" => $faker->paragraph(),
         ];
     }

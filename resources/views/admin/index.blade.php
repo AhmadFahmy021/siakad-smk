@@ -8,7 +8,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Total Kelas</p>
-                                <h4 class="my-1 text-info">4805</h4>
+                                <h4 class="my-1 text-info">{{ $countClass }}</h4>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
                                     class='bx bxs-cart'></i>
@@ -23,7 +23,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Total Siswa</p>
-                                <h4 class="my-1 text-danger">825</h4>
+                                <h4 class="my-1 text-danger">{{ $student }}</h4>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
                                     class='bx bxs-wallet'></i>
@@ -38,7 +38,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Total Guru</p>
-                                <h4 class="my-1 text-success">100</h4>
+                                <h4 class="my-1 text-success">{{ $teacher }}</h4>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
                                     class='bx bxs-bar-chart-alt-2'></i>
@@ -53,7 +53,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Guru Di Bawah Target</p>
-                                <h4 class="my-1 text-warning">12</h4>
+                                <h4 class="my-1 text-warning">{{ $counting }}</h4>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
                                     class='bx bxs-group'></i>

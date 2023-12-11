@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TeacherController extends Controller
@@ -17,14 +18,24 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //Kode untuk menampilkan daftar guru di sekolah
-        // $teacher = Teacher::all();
-        // return view('user.teacher.index', compact('teacher'));
-        // for role admin
-        $teacher = Teacher::all();
-        $user = User::all();
-        $subject = Subject::all();
-        return view('admin.teacher.index', compact(['teacher', 'user', 'subject']));
+        switch (Auth::user()->role) {
+            case 'user':
+                // role user
+                $teacher = Teacher::all();
+                return view('user.teacher.index', compact('teacher'));
+                break;
+            case 'admin':
+                // for role admin
+                $teacher = Teacher::all();
+                $user = User::where('role', '=', 'teacher')->get();
+                $subject = Subject::all();
+                return view('admin.teacher.index', compact(['teacher', 'user', 'subject']));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     /**

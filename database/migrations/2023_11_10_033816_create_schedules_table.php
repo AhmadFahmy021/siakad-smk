@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId("subject_id")->constrained("subjects");
+            $table->string('day');
             $table->time("time_start");
             $table->time("time_end");
             $table->string("room");

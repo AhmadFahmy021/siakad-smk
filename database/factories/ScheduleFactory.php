@@ -22,6 +22,7 @@ class ScheduleFactory extends Factory
         $faker = fake('id_ID');
         return [
             "subject_id" => Subject::all()->random()->id,
+            "day" => $faker->randomElement(['Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu']),
             "time_start" => $faker->time(),
             "time_end" => $faker->time(),
             "room" => $faker->randomElement(['A01','A21','A31','B01','B21','B31','C01','C21','C31','D01','D21','D31']),

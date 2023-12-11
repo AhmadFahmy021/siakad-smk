@@ -27,17 +27,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>Matrix</td>
-                                <td>Matematika</td>
-                                <td>Perhitungan tentang angka-angka</td>
-                                <td>12/12/2023</td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-success btn-sm">Show</a>
-                                    <a href="" class="btn btn-primary btn-sm">Selesai</a>
-                                </td>
-                            </tr>
+                            @foreach ($subjectMaterial as $sm)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $sm->name }}</td>
+                                    <td>{{ $sm->subject->name }}</td>
+                                    <td>{{ Str::limit($sm->description, 25, '...') }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($sm->deadline)) }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ url('teacher/completemateri', Crypt::encrypt($sm->id)) }}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <a href="{{ url('teacher/completemateri', Crypt::encrypt($sm->id)) }}"
+                                                class="btn btn-success btn-sm">Show</a>
+                                            <button type="submit" class="btn btn-primary btn-sm">Selesai</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

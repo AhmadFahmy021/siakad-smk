@@ -13,42 +13,13 @@
                     </div>
                     <div class="ms-auto">
                         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal2"><i class='bx bx-plus'></i> Add Classroom</a>
-                    </div>
-                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content ">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Classroom</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <form action="">
-                                    <div class="modal-body">
-                                        <div class="form-group mb-3">
-                                            <label for="" class="form-label">Nama Kelas</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="" class="form-label">Wali Kelas</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                            data-bs-target="#exampleModal1"><i class='bx bx-plus'></i> Add Classroom</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table align-middle mb-0 text-center">
+                    <table id="example" class="table align-middle mb-0 text-center">
                         <thead class="table-light">
                             <tr>
                                 <th>No.</th>
@@ -64,11 +35,14 @@
                                     <td>{{ $kelas->name }}</td>
                                     <td>{{ $kelas->guardian_teacher }}</td>
                                     <td>
-                                        <form action="{{ url('admin/classroom', Crypt::encrypt($kelas->id)) }}" method="post">
+                                        <form action="{{ url('admin/classroom', Crypt::encrypt($kelas->id)) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ url('admin/classroom/'.Crypt::encrypt($kelas->id).'/edit') }}" class="btn btn-primary btn-sm"><i class='bx bx-edit-alt'></i></a>
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class='bx bx-trash'></i></button>
+                                            <a href="{{ url('admin/classroom/' . Crypt::encrypt($kelas->id) . '/edit') }}"
+                                                class="btn btn-primary btn-sm"><i class='bx bx-edit-alt'></i></a>
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class='bx bx-trash'></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -80,4 +54,32 @@
         </div>
 
     </div>
+@endsection
+@section('modal')
+    <form action="{{ url('admin/classroom') }}" id="form-add" method="POST">
+        @csrf
+        <div class="form-group mb-3">
+            <label for="" class="form-label">Nama Kelas</label>
+            <input type="text" name="nama" class="form-control @error('nama')
+                is-invalid
+            @enderror">
+            @error('nama')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="form-group mb-3">
+            <label for="" class="form-label">Wali Kelas</label>
+            <input type="text" name="wali_kelas" class="form-control @error('wali_kelas')
+                is-invalid
+            @enderror">
+            @error('wali_kelas')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+    </form>
 @endsection

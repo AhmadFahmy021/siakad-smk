@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SubjectController extends Controller
 {
@@ -12,7 +13,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('user.subject.index');
+        $subject = Subject::all();
+        return view('admin.subject.index', compact('subject'));
     }
 
     /**
@@ -28,7 +30,14 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'mapel' => 'required|unique:subjects,name',
+        ]);
+        $req  = [
+            'name' => $request->mapel
+        ]; 
+        Subject::create($req);
+        return redirect('admin/subject');
     }
 
     /**
@@ -42,24 +51,38 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subject $subject)
+    public function edit( $subject)
     {
-        //
+        $id = Crypt::decrypt($subject);
+        $data = Subject::find($id);
+
+        return view('admin.subject.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subject $subject)
-    {
-        //
+    public function update(Request $request, $subject)
+    { 
+        $id = Crypt::decrypt($subject);
+        $data = Subject::find($id);
+
+        $req = [
+            'name' => $request->mapel,
+        ];
+        $data->update($req);
+        return redirect('admin/subject');
+        // dd($request->mapel);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subject $subject)
+    public function destroy( $subject)
     {
-        //
+        $id = Crypt::decrypt($subject);
+        $data = Subject::find($id);
+        $data->delete();
+        return redirect('admin/subject');
     }
 }

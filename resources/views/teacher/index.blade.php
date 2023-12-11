@@ -8,8 +8,13 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Jadwal Selanjutnya</p>
-                                <h4 class="my-1 text-info">X RPL-A</h4>
-                                <p class="mb-0 font-13">Ruangan : <Strong>C-21</Strong></p>
+                                @if ($schedule != null)
+                                    <h4 class="my-1 text-info">{{ $schedule->classroom->name }}</h4>
+                                    <p class="mb-0 font-13">Ruangan : <Strong>{{ $schedule->room }}</Strong></p>
+                                @else
+                                    <h4 class="my-1 text-info">Jadwal Selesai</h4>
+                                    <p class="mb-0 font-13">Ruangan : <Strong>Jadwal Selesai</Strong></p>
+                                @endif
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
                                     class='bx bxs-calendar'></i>
@@ -24,8 +29,8 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Tugas Belum Di Nilai</p>
-                                <h4 class="my-1 text-danger">84</h4>
-                                <p class="mb-0 font-13">Jumlah Kelas : <b>5</b></p>
+                                <h4 class="my-1 text-danger">{{ $collect }}</h4>
+                                <p class="mb-0 font-13">Jumlah Kelas : <b>{{ $countKelas }}</b></p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
                                     class='bx bx-task-x'></i>
@@ -40,7 +45,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Target Materi Tercapai</p>
-                                <h4 class="my-1 text-success">34.6%</h4>
+                                <h4 class="my-1 text-success">{{ $persen }}%</h4>
                                 <p class="mb-0 font-13">Target Dalam : <b> 6 Bulan</b></p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
@@ -56,8 +61,8 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Nilai Siswa Dibawah Target</p>
-                                <h4 class="my-1 text-warning">12</h4>
-                                <p class="mb-0 font-13">Jumlah Kelas : <b>7</b></p>
+                                <h4 class="my-1 text-warning">{{ $grade }}</h4>
+                                <p class="mb-0 font-13">Berdasarkan Data Nilai Test</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
                                     class='bx bxs-group'></i>

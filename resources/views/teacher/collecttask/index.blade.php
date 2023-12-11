@@ -12,37 +12,28 @@
                         <h6 class="mb-0">Collect Task</h6>
                     </div>
                     <div class="ms-auto">
-                        <select class="form-select" aria-label="Default select example">
-                            <option >Open this select menu</option>
-                            <option value="1" selected>One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
+                        <select class="form-select" onchange="tugasK(value)" aria-label="Default select example">
+                            <option selected>Pilih Kelas</option>
+                            @foreach ($kelas as $ks)
+                                <option value="{{ $ks->classroom_id }}">{{ $ks->classroom->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table align-middle mb-0 text-center">
+                    <table id="example" class="table align-middle mb-0 ">
                         <thead class="table-light">
                             <tr>
-                                <th>No.</th>
-                                <th>Nama Siswa</th>
-                                <th>Nama Tugas</th>
-                                <th>Deskripsi</th>
-                                <th>Action</th>
+                                <th class="text-center">No.</th>
+                                <th class="text-center">Nama Siswa</th>
+                                <th class="text-center">Nama Tugas</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>Ahmad Fahmy</td>
-                                <td>Membuat Database</td>
-                                <td>Membuat database dengan kategori berikut ini</td>
-                                <td>
-                                    <a href="" class="btn btn-success btn-sm"><i class='bx bx-show-alt'></i></a>
-                                </td>
-                            </tr>
+                        <tbody class="response">
+
                         </tbody>
                     </table>
                 </div>
@@ -50,4 +41,34 @@
         </div>
 
     </div>
+@endsection
+@section('js')
+    <script>
+        function tugasK(val) {
+            $.ajax({
+                type: "get",
+                url: `${location.origin}/teacher/kelas`,
+                data: {
+                    kode: val
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    $('.response').empty();
+                    data.map((e, i) => {
+                        $('.response').append(`
+                         <tr>
+                            <td class="text-center">${i + 1}</td>
+                            <td class="text-center">${e.student.user.name}</td>
+                            <td class="text-center">${e.task.name}</td>
+                            <td class="text-center">
+                                <a href='${location.origin}/teacher/collecttask/${btoa(e.id)}' class="btn btn-success" target="_blank"><i class='bx bxs-chevrons-right' ></i></a>
+                            </td>
+                        </tr>
+                                    `);
+                    })
+                }
+            });
+        }
+    </script>
 @endsection

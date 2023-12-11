@@ -12,8 +12,8 @@
     <link href="{{ asset('assets') }}/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="{{ asset('assets') }}/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <!-- loader-->
-    <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" />
-    <script src="{{ asset('assets') }}/js/pace.min.js"></script>
+    {{-- <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" />
+    <script src="{{ asset('assets') }}/js/pace.min.js"></script> --}}
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/css/bootstrap-extended.css" rel="stylesheet">
@@ -42,34 +42,58 @@
                                         <p class="mb-0">Please fill the below details to create your account</p>
                                     </div>
                                     <div class="form-body">
-                                        <form class="row g-3">
-                                            <div class="col-12">
-                                                <label for="inputNis" class="form-label">NIS</label>
-                                                <input type="text" class="form-control" id="inputNis"
-                                                    placeholder="NIS">
-                                            </div>
+                                        <form class="row g-3" action="{{ route('register') }}" method="POST">
+                                            @csrf
                                             <div class="col-12">
                                                 <label for="inputName" class="form-label">Name</label>
-                                                <input type="text" class="form-control" id="inputName"
+                                                <input type="text" name="name" class="form-control @error('name')
+                                                    is-invalid
+                                                @enderror" id="inputName"
                                                     placeholder="Name Jhon">
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputUsername" class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="inputUsername"
+                                                <input type="text" name="username" class="form-control @error('username')
+                                                    is-invalid
+                                                @enderror" id="inputUsername"
                                                     placeholder="Username Jhon">
+                                                    @error('username')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
-                                                <input type="email" class="form-control" id="inputEmailAddress"
+                                                <input type="email" name="email" class="form-control @error('email')
+                                                    is-invalid
+                                                @enderror" id="inputEmailAddress"
                                                     placeholder="example@user.com">
+                                                    @error('email')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control border-end-0"
+                                                    <input type="password" name="password" class="form-control border-end-0 @error('password')
+                                                        is-invalid
+                                                    @enderror"
                                                         id="inputChoosePassword" placeholder="Enter Password"> <a
                                                         href="javascript:;" class="input-group-text bg-transparent"><i
                                                             class='bx bx-hide'></i></a>
+                                                    @error('password')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -77,13 +101,13 @@
                                                     <button type="submit" class="btn btn-primary">Register</button>
                                                 </div>
                                             </div>
+                                        </form>
                                             <div class="col-12">
                                                 <div class="text-center ">
                                                     <p class="mb-0">Already have an account? <a
-                                                            href="{{ url('') }}">Log in here</a></p>
+                                                            href="{{ url('login') }}">Log in here</a></p>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
 
                                 </div>

@@ -2,7 +2,7 @@
 @section('main')
     <div class="page-content">
         <div class="page d-none d-sm-flex align-items-center mb-3">
-            <h3>Absensi</h3>     
+            <h3>Absensi</h3>
         </div>
 
         <div class="card radius-10">
@@ -12,7 +12,7 @@
                         <h6 class="mb-0">Absensi</h6>
                     </div>
                     <div class="ms-auto">
-                        <a href="" class="btn btn-primary">Scan QR Code</a>
+                        <a href="{{ url('user/scan/qrcode') }}" class="btn btn-primary"><i class='bx bx-scan' ></i> Scan QR Code</a>
                     </div>
                 </div>
             </div>
@@ -31,15 +31,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>IPAS</td>
-                                <td>Soebariadi, S.Si</td>       
-                                <td>08:00:00</td>
-                                <td>11:00:00</td>
-                                <td> A-31</td>                         
-                                <td>3 Jam</td>                         
-                            </tr>
+                            @foreach ($absen as $ab)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $ab->schedule->subject->name }}</td>
+                                    <td>{{ $ab->schedule->teacher->user->name }}</td>
+                                    <td>{{ $ab->schedule->time_start }}</td>
+                                    <td>{{ $ab->schedule->time_start }}</td>
+                                    <td>{{ $ab->schedule->room }}</td>
+                                    <td>{{ $ab->class_time }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Classroom;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\SubjectMaterial;
@@ -23,6 +24,7 @@ class SubjectGradeFactory extends Factory
         return [
             "subject_id" => Subject::all()->random()->id,
             "student_id" => Student::all()->random()->id,
+            "classroom_id" => Classroom::all()->random()->id,
             "subjectmaterial_id" => SubjectMaterial::all()->random()->id,
             "nilai_skill" => $faker->numberBetween(50,100),
             "nilai_test" => $faker->numberBetween(50,100),

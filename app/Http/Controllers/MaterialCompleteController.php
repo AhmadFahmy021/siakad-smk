@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\MaterialComplete;
 use App\Http\Requests\StoreMaterialCompleteRequest;
 use App\Http\Requests\UpdateMaterialCompleteRequest;
+use App\Models\SubjectMaterial;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class MaterialCompleteController extends Controller
 {
@@ -13,7 +19,12 @@ class MaterialCompleteController extends Controller
      */
     public function index()
     {
-        return view('teacher.completemateri.index');
+        // $com = array();
+        $teacher = Teacher::where('user_id', '=', Auth::user()->id)->first();
+        $com = array_column(MaterialComplete::where('teacher_id', '=', $teacher->id)->get('subjectmaterial_id')->toArray(), 'subjectmaterial_id');
+        $subjectMaterial = SubjectMaterial::whereNotIn('id',$com)->get();        
+        // dd($subjectMaterial);
+        return view('teacher.completemateri.index', compact('subjectMaterial'));
     }
 
     /**
@@ -35,9 +46,13 @@ class MaterialCompleteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MaterialComplete $materialComplete)
+    public function show( $materialComplete)
     {
-        //
+        $id = Crypt::decrypt($materialComplete);
+        $data = SubjectMaterial::find($id);
+
+        return view('teacher.completemateri.show', compact('data'));
+        // dd($data);
     }
 
     /**
@@ -51,9 +66,17 @@ class MaterialCompleteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMaterialCompleteRequest $request, MaterialComplete $materialComplete)
+    public function update(  $materialComplete)
     {
-        //
+        $id = Crypt::decrypt($materialComplete);
+        $teacher = Teacher::where('user_id', '=', 11)->get();
+        MaterialComplete::create([
+            'subjectmaterial_id' => $id,
+            'teacher_id' => $teacher[0]->id,
+            'status' => 'selesai',
+        ]);
+        return redirect('teacher/completemateri');
+        // dd($materialComplete);
     }
 
     /**

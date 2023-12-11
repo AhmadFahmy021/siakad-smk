@@ -30,7 +30,8 @@
 
                                         <div class="form-group mb-3">
                                             <label for="" class="form-label">Pilih Mapel</label>
-                                            <select class="form-select" name="mapel" aria-label="Default select example">
+                                            <select class="form-select" onchange="formSel(value)" name="mapel" aria-label="Default select example">
+                                                <option value="">Pilih Mata Pelajaran</option>
                                                 @foreach ($subject as $sub)
                                                     <option value="{{ $sub->id }}">{{ $sub->name }}</option>
                                                 @endforeach
@@ -38,10 +39,11 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="" class="form-label">Pilih Guru</label>
-                                            <select class="form-select" name="teacher" aria-label="Default select example">
-                                                @foreach ($teacher as $guru)
+                                            <select class="form-select" id="select-teac" name="teacher" aria-label="Default select example">
+                                                <option value="">Data Belum Tersedia</option>
+                                                {{-- @foreach ($teacher as $guru)
                                                     <option value="{{ $guru->id }}">{{ $guru->user->name }} | {{$guru->subject->name  }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                         <div class="form-group mb-3">
@@ -51,6 +53,10 @@
                                                     <option value="{{ $kelas->id }}">{{ $kelas->name }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="" class="form-label">Hari</label>
+                                            <input type="text" name="hari" class="form-control">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="" class="form-label">Waktu Mulai</label>
@@ -118,4 +124,29 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        function formSel(val) {
+            $.ajax({
+                type: "get",
+                url: location.origin + "/admin/tampilguru",
+                data: {
+                    id:val
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#select-teac').empty();
+                    if (data.length == 0) {
+                        $('#select-teac').append(`<option>Data Tidak Tersedia</option>`);
+                    } else {
+                        data.map((e) => {
+                            $('#select-teac').append(`<option value="${e.id}">${e.user.name}</option>`);
+                        })
+                    }
+                }
+            });
+        }
+    </script>
 @endsection

@@ -12,8 +12,8 @@
     <link href="{{ asset('assets') }}/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="{{ asset('assets') }}/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <!-- loader-->
-    <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" />
-    <script src="{{ asset('assets') }}/js/pace.min.js"></script>
+    {{-- <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" />
+    <script src="{{ asset('assets') }}/js/pace.min.js"></script> --}}
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/css/bootstrap-extended.css" rel="stylesheet">
@@ -42,20 +42,33 @@
                                         <p class="mb-0">Please log in to your account</p>
                                     </div>
                                     <div class="form-body">
-                                        <form class="row g-3">
+                                        <form action="{{ route('login') }}" method="POST" class="row g-3">
+                                            @csrf
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="inputEmailAddress"
-                                                    placeholder="jhon@example.com">
+                                                <input type="email" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    value="{{ old('email') }}" required autocomplete="email" autofocus
+                                                    id="inputEmailAddress" placeholder="jhon@example.com">
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control border-end-0"
-                                                        id="inputChoosePassword"
-                                                        placeholder="Enter Password"> <a href="javascript:;"
-                                                        class="input-group-text bg-transparent"><i
+                                                    <input type="password" name="password"
+                                                        class="form-control border-end-0 @error('password') is-invalid @enderror"
+                                                        id="inputChoosePassword" placeholder="Enter Password"> <a
+                                                        href="javascript:;" class="input-group-text bg-transparent"><i
                                                             class='bx bx-hide'></i></a>
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror   
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

@@ -2,7 +2,7 @@
 @section('main')
     <div class="page-content">
         <div class="page d-none d-sm-flex align-items-center mb-3">
-            <h3>Subject Grade</h3>     
+            <h3>Subject Grade</h3>
         </div>
 
         <div class="card radius-10">
@@ -37,20 +37,22 @@
                                 <th>No.</th>
                                 <th>Mata Pelajaran</th>
                                 <th>Materi</th>
-                                <th>Skill</th>
-                                <th>Test</th>
-                                <th>Attitude</th>
+                                <th>Keterampilan</th>
+                                <th>Pengetahuan</th>
+                                <th>Sopan & Santun</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr>
-                                <td>1.</td>
-                                <td>Matematika</td>
-                                <td>Matrix</td>
-                                <td>60.5</td>
-                                <td>80.0</td>       
-                                <td>90</td>                         
-                            </tr>
+                            @foreach ($nilai as $ni)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $ni->subject->name }}</td>
+                                    <td>{{ $ni->subjectmaterial->name }}</td>
+                                    <td>{{ $ni->nilai_skill }}</td>
+                                    <td>{{ $ni->nilai_test }}</td>
+                                    <td>{{ $ni->nilai_attitude }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

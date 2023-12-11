@@ -7,9 +7,9 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 text-secondary">Total Remidi</p>
-                                <h4 class="my-1 text-info">4805</h4>
-                                <p class="mb-0 font-13">+2.5% from last week</p>
+                                <p class="mb-0 text-secondary">Total Nilai Keterampilan </p>
+                                <h4 class="my-1 text-info">{{ $gradeSkill }}</h4>
+                                <p class="mb-0 font-13">Nilai < 75</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
                                     class='bx bx-task-x'></i>
@@ -23,9 +23,9 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 text-secondary">Total Kehadiran</p>
-                                <h4 class="my-1 text-danger">$84,245</h4>
-                                <p class="mb-0 font-13">+5.4% from last week</p>
+                                <p class="mb-0 text-secondary">Total Nilai Pengetahuan</p>
+                                <h4 class="my-1 text-danger">{{ $gradeTest }}</h4>
+                                <p class="mb-0 font-13">Nilai < 75</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
                                     class='bx bxs-user-check'></i>
@@ -39,9 +39,9 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 text-secondary">Total Alpha</p>
-                                <h4 class="my-1 text-success">34.6%</h4>
-                                <p class="mb-0 font-13">-4.5% from last week</p>
+                                <p class="mb-0 text-secondary">Total Nilai Sopan & Santun</p>
+                                <h4 class="my-1 text-success">{{ $gradeAttitude }}</h4>
+                                <p class="mb-0 font-13">Nilai < 75</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
                                     class='bx bxs-user-x'></i>
@@ -55,8 +55,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 text-secondary">Total Izin</p>
-                                <h4 class="my-1 text-warning">8.4K</h4>
+                                <p class="mb-0 text-secondary">Total Jam Kehadiran</p>
+                                <h4 class="my-1 text-warning">{{ $absen }}</h4>
                                 <p class="mb-0 font-13">+8.4% from last week</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i

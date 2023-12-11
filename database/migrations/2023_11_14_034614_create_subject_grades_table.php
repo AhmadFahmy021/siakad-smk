@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subject_id')->constrained('subjects');
             $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('classroom_id')->constrained('classrooms');
             $table->foreignId('subjectmaterial_id')->constrained('subject_materials');
             $table->integer('nilai_skill')->nullable();
             $table->integer('nilai_test')->nullable();

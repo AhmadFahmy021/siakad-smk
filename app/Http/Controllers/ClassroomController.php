@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Http\Requests\StoreClassroomRequest;
 use App\Http\Requests\UpdateClassroomRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class ClassroomController extends Controller
@@ -29,9 +30,19 @@ class ClassroomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreClassroomRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'wali_kelas' => 'required',
+        ]);
+
+        $req = [
+            'name' => $request->nama,
+            'guardian_teacher' => $request->wali_kelas, 
+        ];
+        Classroom::create($req);
+        return redirect('admin/classroom');
     }
 
     /**
@@ -48,23 +59,39 @@ class ClassroomController extends Controller
     public function edit( $classroom)
     {
         $id = Crypt::decrypt($classroom);
-    
+        $data = Classroom::find($id);
+
+        return view('admin.classroom.edit', compact(['data']));
         dd($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClassroomRequest $request, Classroom $classroom)
+    public function update(Request $request, $classroom)
     {
-        //
+        $id = Crypt::decrypt($classroom);
+        $data = Classroom::find($id);
+
+        $req = [
+            'name' => $request->nama,
+            'guardian_teacher' => $request->wali_kelas, 
+        ];
+
+        $data->update($req);
+        return redirect('admin/classroom');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classroom $classroom)
+    public function destroy( $classroom)
     {
-        //
+        $id = Crypt::decrypt($classroom);
+        $data = Classroom::find($id);
+        $data->delete();
+
+        return redirect('admin/classroom');
     }
 }

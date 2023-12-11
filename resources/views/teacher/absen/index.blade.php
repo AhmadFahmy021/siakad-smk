@@ -29,16 +29,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>XII-RPLA</td>
-                                <td>A-3.1</td>
-                                <td>3e</td>
-                                <td>
-                                    <a href="" class="btn btn-primary btn-sm">Generate Qr Code</a>
-                                    <a href="" class="btn btn-success btn-sm">Show Qr Code</a>
-                                </td>
-                            </tr>
+                            @foreach ($schedule as $sc)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $sc->classroom->name }}</td>
+                                    <td>{{ $sc->room }}</td>
+                                    <td>{{ $sc->code }}</td>
+                                    <td>
+                                        <a href="{{ url('teacher/absen/'. Crypt::encrypt($sc->id).'/edit',) }}" class="btn btn-primary btn-sm"><i class='bx bx-qr-scan' ></i> Generate Qr Code</a>
+                                        <a href="{{ url('teacher/absen/'. Crypt::encrypt($sc->id).'/generateqr',) }}" class="btn btn-success btn-sm">Show Qr Code</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

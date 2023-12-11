@@ -12,7 +12,7 @@
                     @method('PUT')
                     <div class="form-group mb-3">
                         <label for="" class="form-label">Pilih User</label>
-                        <select class="form-select select2-form"  name="user" aria-label="Default select example">
+                        <select class="form-select select2-form-edit"  name="user" aria-label="Default select example">
                             @foreach ($user as $us)
                                 <option value="{{ $us->id }}" @selected($data->user_id == $us->id)>{{ $us->name }}</option>
                             @endforeach
@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="" class="form-label">Pilih Mata Pelajaran</label>
-                        <select class="form-select select2-form" name="mapel" aria-label="Default select example">
+                        <select class="form-select select2-form-edit" name="mapel" aria-label="Default select example">
                             @foreach ($subject as $mapel)
                                 
                             <option value="{{ $mapel->id }}" @selected($data->subject_id == $mapel->id)>{{ $mapel->name }}</option>

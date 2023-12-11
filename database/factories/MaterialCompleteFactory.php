@@ -22,7 +22,7 @@ class MaterialCompleteFactory extends Factory
         return [
             "subjectmaterial_id" => SubjectMaterial::all()->random()->id,
             "teacher_id" => Teacher::all()->random()->id,
-            "status" => $faker->randomElement(['Selesai','Selesai Tidak Semua', 'Tertunda', 'Belu Selesai']),
+            "status" => $faker->randomElement(['Selesai','Selesai Tidak Semua', 'Tertunda', 'Belum Selesai']),
             "description" => $faker->paragraph(),
         ];
     }

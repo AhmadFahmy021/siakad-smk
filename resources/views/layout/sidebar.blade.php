@@ -6,12 +6,162 @@
         <div>
             <h4 class="logo-text">Rocker</h4>
         </div>
-        <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
+        <div class="toggle-icon ms-auto"><i class='bx bx-menu'></i>
         </div>
      </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
+        @if (Auth::user()->role == 'user')
         <li>
+            <a href="{{ url('user/dashboard', []) }}">
+                <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('user/grade', []) }}">
+                <div class="parent-icon"><i class='bx bx-list-ul' ></i>
+                </div>
+                <div class="menu-title">Nilai</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('user/schedule', []) }}">
+                <div class="parent-icon"><i class='bx bxs-calendar'></i>
+                </div>
+                <div class="menu-title">Jadwal Pelajaran</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('user/teacher', []) }}">
+                <div class="parent-icon"><i class='bx bxs-user-badge' ></i>
+                </div>
+                <div class="menu-title">Daftar Guru</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('user/absen', []) }}">
+                <div class="parent-icon"><i class='bx bxs-book-alt'></i>
+                </div>
+                <div class="menu-title">Absen</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('user/collecttask', []) }}">
+                <div class="parent-icon"><i class='bx bxs-book-alt'></i>
+                </div>
+                <div class="menu-title">Pengumpulan Tugas</div>
+            </a>
+        </li>
+        @elseif (Auth::user()->role == 'teacher')
+        <li>
+            <a href="{{ url('teacher/dashboard', []) }}">
+                <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('teacher/grade', []) }}">
+                <div class="parent-icon"><i class='bx bx-list-ul' ></i>
+                </div>
+                <div class="menu-title">Nilai</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('teacher/schedule', []) }}">
+                <div class="parent-icon"><i class='bx bxs-calendar'></i>
+                </div>
+                <div class="menu-title">Jadwal Pelajaran</div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                </div>
+                <div class="menu-title">Tugas</div>
+            </a>
+            <ul>
+                <li> <a href="{{ url('teacher/task', []) }}"><i class='bx bx-radio-circle'></i>Buat Tugas</a>
+                </li>
+                <li> <a href="{{ url('teacher/collecttask') }}"><i class='bx bx-radio-circle'></i>Pengumpulan Tugas</a>
+                </li>
+            </ul>
+        </li>
+        {{-- <li>
+            <a href="{{ url('teacher/task', []) }}">
+                <div class="parent-icon"><i class='bx bxs-user-badge' ></i>
+                </div>
+                <div class="menu-title"></div>
+            </a>
+        </li> --}}
+        <li>
+            <a href="{{ url('teacher/absen', []) }}">
+                <div class="parent-icon"><i class='bx bxs-book-alt'></i>
+                </div>
+                <div class="menu-title">Absen</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('teacher/completemateri', []) }}">
+                <div class="parent-icon"><i class='bx bx-task'></i>
+                </div>
+                <div class="menu-title">Selesaikan Materi</div>
+            </a>
+        </li>
+        @elseif (Auth::user()->role == 'admin')
+        <li>
+            <a href="{{ url('admin/dashboard', []) }}">
+                <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/classroom', []) }}">
+                <div class="parent-icon"><i class='bx bx-list-ul' ></i>
+                </div>
+                <div class="menu-title">Daftar Kelas</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/schedule', []) }}">
+                <div class="parent-icon"><i class='bx bxs-calendar'></i>
+                </div>
+                <div class="menu-title">Jadwal Pelajaran</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/teacherlist', []) }}">
+                <div class="parent-icon"><i class='bx bxs-user-badge' ></i>
+                </div>
+                <div class="menu-title">Daftar Guru</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/studentlist', []) }}">
+                <div class="parent-icon"><i class='bx bxs-user-badge' ></i>
+                </div>
+                <div class="menu-title">Daftar Siswa</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/subjectmaterials', []) }}">
+                <div class="parent-icon"><i class='bx bxs-book-alt'></i>
+                </div>
+                <div class="menu-title">Materi Mata Pelajaran</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/users', []) }}">
+                <div class="parent-icon"><i class='bx bxs-user-detail' ></i>
+                </div>
+                <div class="menu-title">Users</div>
+            </a>
+        </li>
+        @endif
+        {{-- <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i>
                 </div>
@@ -340,7 +490,7 @@
                 </div>
                 <div class="menu-title">Support</div>
             </a>
-        </li>
+        </li> --}}
     </ul>
     <!--end navigation-->
 </div>

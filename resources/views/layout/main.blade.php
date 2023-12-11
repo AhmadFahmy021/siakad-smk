@@ -4,7 +4,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
     <!--favicon-->
     {{-- <link rel="icon" href="{{ asset('assets') }}/images/favicon-32x32.png" type="image/png" /> --}}
     <!--plugins-->
@@ -13,8 +14,8 @@
     <link href="{{ asset('assets') }}/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <link href="{{ asset('assets') }}/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <!-- loader-->
-    <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" />
-    <script src="{{ asset('assets') }}/js/pace.min.js"></script>
+    {{-- <link href="{{ asset('assets') }}/css/pace.min.css" rel="stylesheet" /> --}}
+    {{-- <script src="{{ asset('assets') }}/js/pace.min.js"></script> --}}
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/css/bootstrap-extended.css" rel="stylesheet">
@@ -160,7 +161,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('form-add').submit();">Save changes</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="event.preventDefault(); document.getElementById('form-add').submit();">Save
+                        changes</button>
                 </div>
             </div>
         </div>
@@ -205,7 +208,11 @@
                 dropdownParent: $('#exampleModal1'),
                 theme: "bootstrap-5"
             });
+            $('.select2-form-edit').select2({
+                theme: "bootstrap-5"
+            });
         });
+
 
         // $(document).ready(function() {
         // });

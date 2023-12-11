@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('classroom_id')->constrained('classrooms');
             $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('teacher_id')->constrained('teachers');
+            $table->foreignId('subjectmaterial_id')->constrained('subject_materials');
             $table->date('deadline');
             // $table;
             $table->timestamps();

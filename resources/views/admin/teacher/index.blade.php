@@ -77,8 +77,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $guru->nip }}</td>
-                                    <td>{{ $guru->user->name }}</td>
-                                    <td>{{ $guru->subject->name }}</td>
+                                    <td>{{ $guru->user->name ?? null}}</td>
+                                    <td>{{ $guru->subject->name ?? null}}</td>
                                     <td>{{ $guru->hp }}</td>
                                     <td>
                                         <form action="{{ url('admin/teacherlist/'. Crypt::encrypt($guru->id)) }}" method="post" >
